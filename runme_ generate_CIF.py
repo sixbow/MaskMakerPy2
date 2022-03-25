@@ -74,11 +74,11 @@ ro_d = 20 # distance of top NbTiN plate to roline
 L_caps_top = np.array([50.961 ,49.794 ,48.675 ,56.837 ,55.667 ,54.541 ,59.546 ,58.449 ,57.390 ,61.127 ,60.091 ,59.088]) # Plate length (or width), just 12 numbers that I randomly chose...
 W_caps_top = L_caps_top
 W_coupler = 4
-L_coupler_overlap = 5.75
+L_coupler_overlap = np.array([5.50, 5.50, 5.50, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]) # Oeff coupling sizes
 W_CPW = 2
 for n in range(0,N_KIDs):
     moveto(kid_x[n], ly/2.) # Bruno: moves current coordinates (and the KID is drawn there)
-    connectors = parts.PPCKIDs.Sietse_testKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap, W_CPW)
+    connectors = parts.PPCKIDs.Sietse_testKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW)
 
 #%%
 ## DRAW Bondpads and readout

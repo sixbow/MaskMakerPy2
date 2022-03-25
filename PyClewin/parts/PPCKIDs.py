@@ -67,14 +67,23 @@ def Sietse_testKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap
     wire(-1j, L_Al, W_CPW)
             # SiN Patch 2
     layername('SiN')
-    movedirection(-1j, L_Al + SiN_d)
+    movedirection(-1j, L_Al + 8*SiN_d)
     wire(-1j, SiN_L, SiN_W)
         # SiC
     layername('SiC')
     gomark('KiD_sym_centre')
     movedirection(1j, ro_line_width/2 + SiC_margin)
     wire(-1j, L_cap_top + ro_line_width + ro_d + SiC_margin + SiC_bottom_L, W_cap_top + 2*SiC_margin)
-     
+        # CPW slot NbTiN_GND Hybrid section 
+        #
+    #ViaGap_L = ro_line_width/2 + ro_d + L_cap_top +SiC_bottom_L + SiN_d  + SiN_L - Al_SiN_L_overlap - (ro_line_width/2 + L_coupler + L_cap_top)
+    layername('NbTiN_GND')
+    gomark('KiD_sym_centre')
+    #movedirection(-1j, ro_line_width/2 + L_coupler + L_cap_top)
+    movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
+    wire(-1j, L_Al  , 3*W_CPW)
+    print (ro_line_width/2 + L_coupler + L_cap_top)    
+
     return connectors
 
 
