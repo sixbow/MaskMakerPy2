@@ -75,10 +75,11 @@ L_caps_top = np.array([50.961 ,49.794 ,48.675 ,56.837 ,55.667 ,54.541 ,59.546 ,5
 W_caps_top = L_caps_top
 W_coupler = 4
 L_coupler_overlap = np.array([5.50, 5.50, 5.50, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]) # Oeff coupling sizes
-W_CPW = 2
+W_CPW = np.array([0.5, 0.5, 0.5, 1, 1, 1, 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
+
 for n in range(0,N_KIDs):
     moveto(kid_x[n], ly/2.) # Bruno: moves current coordinates (and the KID is drawn there)
-    connectors = parts.PPCKIDs.Sietse_testKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW)
+    connectors = parts.PPCKIDs.Sietse_testKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n])
 
 #%%
 ## DRAW Bondpads and readout
