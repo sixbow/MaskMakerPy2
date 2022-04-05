@@ -11,7 +11,7 @@ from collections import OrderedDict # This is a dictionary where the key-value p
 #%%
 filename = 'CKID_chipV1.cif'
 # file with design parameters
-#We currently don't import a csv. See git history to view this csv.#  design = np.loadtxt('design_bruno.txt', skiprows = 1)
+design = np.loadtxt('partof_design_parameters.txt', skiprows = 1)
 
 # enable symbol writing
 gg.doSymbolWriting = True
