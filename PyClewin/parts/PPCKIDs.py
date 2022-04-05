@@ -12,8 +12,8 @@ import numpy as np
 import scipy.constants as spc
 import CPWs
 
-def Sietse_testKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_top, W_coupler, L_coupler_overlap, W_CPW):
-    from PyClewin import *
+def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_top, W_coupler, L_coupler_overlap, W_CPW):
+    #Edit_Siets: I think this should not be here!! #from PyClewin import *
         
     # Make connectors, I think we need 3 connectors per KID to make sure that the bridges won't overlap with the coupler
     setmark('KiD_sym_centre')
@@ -141,7 +141,7 @@ def PPCkid_v6(direction, CAP_bot, CAP_top, N, L_arm, arm_spacing, arm_gap, W_ind
     wire(direction, CAP_bot[0]+diel_spacing, CAP_bot[1]+diel_spacing , shift=(-diel_spacing/2.,0))
     
 def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_gap, ro_line, distance_kids, layers, connectors, n):
-    from PyClewin import *
+    #Edit_Siets: I think this should not be here!! #from PyClewin import *
 
     
     L_cap_top = L_cap
@@ -275,7 +275,7 @@ def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     return connectors
     
 def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_gap, ro_line, distance_kids, layers, connectors, n):
-    from PyClewin import *
+    #Edit_Siets: I think this should not be here!! #from PyClewin import *
 
     
     L_cap_top = L_cap
