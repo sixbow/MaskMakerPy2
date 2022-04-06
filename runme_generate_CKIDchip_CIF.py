@@ -18,7 +18,6 @@ gg.doSymbolWriting = True
 
 layers = OrderedDict()
 #layers = collections.OrderedDict()
-layers['SiN'] =  '067000aa'
 layers['NbTiN_GND'] =  '0ff00ff00'
 layers['SiC'] = '050000aa'
 layers['NbTiN_line'] = '0ff0000ff'

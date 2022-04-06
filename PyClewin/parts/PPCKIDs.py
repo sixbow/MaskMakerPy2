@@ -57,18 +57,10 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     gomark('KiD_sym_centre')
     movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
     wire(-1j, SiC_bottom_L + NbTiN_SiN_L_overlap + SiN_d, W_CPW)
-        # SiN Patch 1
-    layername('SiN')
-    movedirection(-1j, SiC_bottom_L + SiN_d)
-    wire(-1j, SiN_L, SiN_W)
        # Al
     layername('Aluminum')
     movedirection(-1j, SiN_L - Al_SiN_L_overlap)
     wire(-1j, L_Al, W_CPW)
-            # SiN Patch 2
-    layername('SiN')
-    movedirection(-1j, L_Al + 8*SiN_d)
-    wire(-1j, SiN_L, SiN_W)
         # SiC
     layername('SiC')
     gomark('KiD_sym_centre')
