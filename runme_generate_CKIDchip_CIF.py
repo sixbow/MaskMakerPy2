@@ -25,7 +25,6 @@ layers['NbTiN_line'] = '0ff0000ff'
 layers['Polyimide'] = '0ff0f000'
 layers['Aluminum'] = '0fff0000'
 layers['text'] = '05000000'
-layers['PPC_KID'] = '0f00cbff'
 
 # Bruno: Add the layers to the gg object 
 for k,v in layers.items():

@@ -12,7 +12,6 @@ L L3; (CleWin: 3 NbTiN_line/0ff0000ff 0ff0000ff));
 L L4; (CleWin: 4 Polyimide/0ff0f000 0ff0f000));
 L L5; (CleWin: 5 Aluminum/0fff0000 0fff0000));
 L L6; (CleWin: 6 text/05000000 05000000));
-L L7; (CleWin: 7 PPC_KID/0f00cbff 0f00cbff));
 (Symbol definitions:);
 (Top level:);
 DS1 1 10;
