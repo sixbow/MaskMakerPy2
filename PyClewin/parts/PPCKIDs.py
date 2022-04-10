@@ -35,6 +35,8 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
         # Parameters
     L_TLtoPPC = 20
     L_OrigintoMSL = (ro_line.line/2) - L_coupler_overlap
+    SiC_padding = 6
+    L_connectfromSiC = 4
     #L_Al = 1000
     #SiC_margin = 40 
     #SiC_bottom_L = 15
@@ -78,7 +80,12 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     setmark('KID_begin_PPC_print')
     wire(-1j, L_cap_top + (2*pbNbTiN_Topy), W_cap_top + (2*pbNbTiN_Topx))
     # End writing: PPC 
-
+    # Begin writing: NbTiN via/slope connector
+    gomark('KID_begin_PPC_print')
+    movedirection(-1j, L_cap_top + (2*pbNbTiN_Topy) )
+    setmark('KID_end_PPC_print')
+    wire(-1j,SiC_padding + L_connectfromSiC , 4+pbNbTiN_Topx)
+    # End writing: NbTiN via/slope connector
 
 
 
