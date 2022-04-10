@@ -41,40 +41,40 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     SiN_d = -4
     SiN_L = 30
     SiN_W = 20
-        # NbTiN top 
-    layername('NbTiN_line')
-            # Coupler
-    gomark('KiD_sym_centre')
-    movedirection(-1j, ro_line.line/2 - L_coupler_overlap)
-    L_coupler = ro_d + ro_line.slot + L_coupler_overlap
-    wire(-1j, L_coupler, W_coupler)
-            # Parallel plate
-    gomark('KiD_sym_centre')
-    ro_line_width = 2 * ro_line.slot + ro_line.line
-    movedirection(-1j, ro_line_width/2 + ro_d)
-    wire(-1j, L_cap_top, W_cap_top)
-            # Connection with CPW
-    gomark('KiD_sym_centre')
-    movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
-    wire(-1j, SiC_bottom_L + NbTiN_SiN_L_overlap + SiN_d, W_CPW)
-       # Al
-    layername('Aluminum')
-    movedirection(-1j, SiN_L - Al_SiN_L_overlap)
-    wire(-1j, L_Al, W_CPW)
-        # SiC
-    layername('SiC')
-    gomark('KiD_sym_centre')
-    movedirection(1j, ro_line_width/2 + SiC_margin)
-    wire(-1j, L_cap_top + ro_line_width + ro_d + SiC_margin + SiC_bottom_L, W_cap_top + 2*SiC_margin)
-        # CPW slot NbTiN_GND Hybrid section 
-        #
-    #ViaGap_L = ro_line_width/2 + ro_d + L_cap_top +SiC_bottom_L + SiN_d  + SiN_L - Al_SiN_L_overlap - (ro_line_width/2 + L_coupler + L_cap_top)
-    layername('NbTiN_GND')
-    gomark('KiD_sym_centre')
-    #movedirection(-1j, ro_line_width/2 + L_coupler + L_cap_top)
-    movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
-    wire(-1j, L_Al  , 3*W_CPW)
-    print (ro_line_width/2 + L_coupler + L_cap_top)    
+    #     # NbTiN top 
+    # layername('NbTiN_line')
+    #         # Coupler
+    # gomark('KiD_sym_centre')
+    # movedirection(-1j, ro_line.line/2 - L_coupler_overlap)
+    # L_coupler = ro_d + ro_line.slot + L_coupler_overlap
+    # wire(-1j, L_coupler, W_coupler)
+    #         # Parallel plate
+    # gomark('KiD_sym_centre')
+    # ro_line_width = 2 * ro_line.slot + ro_line.line
+    # movedirection(-1j, ro_line_width/2 + ro_d)
+    # wire(-1j, L_cap_top, W_cap_top)
+    #         # Connection with CPW
+    # gomark('KiD_sym_centre')
+    # movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
+    # wire(-1j, SiC_bottom_L + NbTiN_SiN_L_overlap + SiN_d, W_CPW)
+    #    # Al
+    # layername('Aluminum')
+    # movedirection(-1j, SiN_L - Al_SiN_L_overlap)
+    # wire(-1j, L_Al, W_CPW)
+    #     # SiC
+    # layername('SiC')
+    # gomark('KiD_sym_centre')
+    # movedirection(1j, ro_line_width/2 + SiC_margin)
+    # wire(-1j, L_cap_top + ro_line_width + ro_d + SiC_margin + SiC_bottom_L, W_cap_top + 2*SiC_margin)
+    #     # CPW slot NbTiN_GND Hybrid section 
+    #     #
+    # #ViaGap_L = ro_line_width/2 + ro_d + L_cap_top +SiC_bottom_L + SiN_d  + SiN_L - Al_SiN_L_overlap - (ro_line_width/2 + L_coupler + L_cap_top)
+    # layername('NbTiN_GND')
+    # gomark('KiD_sym_centre')
+    # #movedirection(-1j, ro_line_width/2 + L_coupler + L_cap_top)
+    # movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
+    # wire(-1j, L_Al  , 3*W_CPW)
+    # print (ro_line_width/2 + L_coupler + L_cap_top)    
 
     return connectors
 
