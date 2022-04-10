@@ -34,6 +34,7 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # Write KID
         # Parameters
     L_TLtoPPC = 20
+    L_OrigintoMSL = (ro_line.line/2) - L_coupler_overlap
     #L_Al = 1000
     #SiC_margin = 40 
     #SiC_bottom_L = 15
@@ -42,6 +43,13 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # SiN_d = -4
     # SiN_L = 30
     # SiN_W = 20
+        # Process Bias for optical nanofabrication [um] +is outward(bigger then design value) and -is inward (smaller than design value) mask
+    pbNbTiN_GNDx = 0
+    pbNbTiN_GNDy = 0
+    pbNbTiN_Topx = 0
+    pbNbTiN_Topy = 0
+    pbSiCx = 0 
+    pbSiCy = 0
 
 
 
@@ -50,12 +58,28 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # Draw Microstrip line that connects the Throughline(TL) with the Parrallel plate capacitor(PPC).
     # Begin position relative to KID_sym_center (This is the middle of the TL line.).
     # -j( width TL signal/2  - Oeff (this is the overlap)) in the -y direction
+    # Begin writing: MSL
     layername('NbTiN_Top')
     gomark('KID_sym_center') # First we reset the cursor to the origin(Middle of TL)
-    movedirection(-1j, (ro_line.line/2)-L_coupler_overlap)# Set cursus on beginning of the MSL.
-    L_MSL = L_coupler_overlap + ro_line.gap + L_TLtoPPC
-    setmark('KiD_begin_MSL')
-    wire(-1j, L_MSL, 4)
+    movedirection(-1j, L_OrigintoMSL)# Set cursus on beginning of the MSL target value.
+    setmark('KID_begin_MSL_target')
+    movedirection(-1j, -pbNbTiN_Topy)# Set cursus on beginning of the MSL print value.
+    setmark('KID_begin_MSL_print')
+    L_MSL = L_coupler_overlap + ro_line.gap + L_TLtoPPC  # This is the lenght that the MSL should be. 
+    wire(-1j, L_MSL, 4+(2*pbNbTiN_Topx)) # Makes the MSL.
+    # End writing: MSL
+    # 
+    # Begin writing: PPC
+    layername('NbTiN_Top')
+    gomark('KID_begin_MSL_target')
+    movedirection(-1j,L_MSL)
+    setmark('KID_begin_PPC_target')
+    movedirection(-1j, -pbNbTiN_Topy)
+    setmark('KID_begin_PPC_print')
+    wire(-1j, L_cap_top + (2*pbNbTiN_Topy), W_cap_top + (2*pbNbTiN_Topx))
+    # End writing: PPC 
+
+
 
 
 
