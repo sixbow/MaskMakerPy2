@@ -20,7 +20,7 @@ layers = OrderedDict()
 #layers = collections.OrderedDict()
 layers['NbTiN_GND'] =  '0ff00ff00'
 layers['SiC'] = '050000aa'
-layers['NbTiN_line'] = '0ff0000ff'
+layers['NbTiN_Top'] = '0ff0000ff'
 layers['Polyimide'] = '0ff0f000'
 layers['Aluminum'] = '0fff0000'
 layers['text'] = '05000000'
@@ -55,14 +55,22 @@ kid_x = lx/2. + np.array(kid_x) # Array of x-positions of KIDs (microns)
 
 #%%
 #%% Readoutline
-# Bruno: It seems that ro_line_sparse and ro_line_dense are exactly the same 
-ro_line_dense = parts.CPWs.CPWreadout(20, 8, mesh, 200, 'NbTiN_GND', 'text',
+# Bruno: It seems that ro_line_sparse and ro_line_dense are exactly the same
+# 
+CPW_TL_W = 20
+CPW_TL_S = 8
+
+ro_line_dense = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
                                 parts.Bridges.Bridge('Polyimide', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
                                 bridgeDistance = 1e3)
 
-ro_line_sparse = parts.CPWs.CPWreadout(20, 8, mesh, 200, 'NbTiN_GND', 'text',
+ro_line_sparse = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
                                 parts.Bridges.Bridge('Polyimide', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
                                 bridgeDistance = 1e3)
+
+# Display the TL properties.
+print("W(line) TL is : {0}".format(str(ro_line_sparse.line)))
+print("S(gap) TL is : {0}".format(str(ro_line_sparse.gap)))
 
 #%%
 #%% DRAW KIDs

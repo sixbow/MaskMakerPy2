@@ -16,13 +16,13 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     #Edit_Siets: I think this should not be here!! #from PyClewin import *
         
     # Make connectors, I think we need 3 connectors per KID to make sure that the bridges won't overlap with the coupler
-    setmark('KiD_sym_centre')
+    setmark('KID_sym_center')
     
     movedirection(-1,distance_kids/2)
     setmark('KID'+str(n+1)+'in')
     connectors.append(base.connector(1,'KID'+str(n+1)+'in'))
     
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
     setmark('KID'+str(n+1))
     connectors.append(base.connector(1,'KID'+str(n+1)))
     
@@ -33,28 +33,49 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     
     # Write KID
         # Parameters
-    L_Al = 1000
-    SiC_margin = 40 
-    SiC_bottom_L = 15
-    NbTiN_SiN_L_overlap = 20
-    Al_SiN_L_overlap = 20
-    SiN_d = -4
-    SiN_L = 30
-    SiN_W = 20
+    L_TLtoPPC = 20
+    #L_Al = 1000
+    #SiC_margin = 40 
+    #SiC_bottom_L = 15
+    #NbTiN_SiN_L_overlap = 20
+    #Al_SiN_L_overlap = 20
+    # SiN_d = -4
+    # SiN_L = 30
+    # SiN_W = 20
+
+
+
+
+
+    # Draw Microstrip line that connects the Throughline(TL) with the Parrallel plate capacitor(PPC).
+    # Begin position relative to KID_sym_center (This is the middle of the TL line.).
+    # -j( width TL signal/2  - Oeff (this is the overlap)) in the -y direction
+    layername('NbTiN_Top')
+    gomark('KID_sym_center') # First we reset the cursor to the origin(Middle of TL)
+    movedirection(-1j, (ro_line.line/2)-L_coupler_overlap)# Set cursus on beginning of the MSL.
+    L_MSL = L_coupler_overlap + ro_line.gap + L_TLtoPPC
+    setmark('KiD_begin_MSL')
+    wire(-1j, L_MSL, 4)
+
+
+
+
+
+
     #     # NbTiN top 
     # layername('NbTiN_line')
     #         # Coupler
-    # gomark('KiD_sym_centre')
+    # gomark('KID_sym_center')
     # movedirection(-1j, ro_line.line/2 - L_coupler_overlap)
     # L_coupler = ro_d + ro_line.slot + L_coupler_overlap
     # wire(-1j, L_coupler, W_coupler)
     #         # Parallel plate
-    # gomark('KiD_sym_centre')
+    # gomark('KID_sym_center')
     # ro_line_width = 2 * ro_line.slot + ro_line.line
     # movedirection(-1j, ro_line_width/2 + ro_d)
     # wire(-1j, L_cap_top, W_cap_top)
     #         # Connection with CPW
-    # gomark('KiD_sym_centre')
+    # gomark('KID_sym_center')
     # movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
     # wire(-1j, SiC_bottom_L + NbTiN_SiN_L_overlap + SiN_d, W_CPW)
     #    # Al
@@ -63,14 +84,14 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # wire(-1j, L_Al, W_CPW)
     #     # SiC
     # layername('SiC')
-    # gomark('KiD_sym_centre')
+    # gomark('KID_sym_center')
     # movedirection(1j, ro_line_width/2 + SiC_margin)
     # wire(-1j, L_cap_top + ro_line_width + ro_d + SiC_margin + SiC_bottom_L, W_cap_top + 2*SiC_margin)
     #     # CPW slot NbTiN_GND Hybrid section 
     #     #
     # #ViaGap_L = ro_line_width/2 + ro_d + L_cap_top +SiC_bottom_L + SiN_d  + SiN_L - Al_SiN_L_overlap - (ro_line_width/2 + L_coupler + L_cap_top)
     # layername('NbTiN_GND')
-    # gomark('KiD_sym_centre')
+    # gomark('KID_sym_center')
     # #movedirection(-1j, ro_line_width/2 + L_coupler + L_cap_top)
     # movedirection(-1j, ro_line_width/2 + ro_d + L_cap_top)
     # wire(-1j, L_Al  , 3*W_CPW)
@@ -160,13 +181,13 @@ def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     offset_diel = (length_coupling_bridge - length_bridge_diel)/2
     width_bridge_diel = 2*12.0 + width_coupling_bridge
     
-    setmark('KiD_sym_centre')
+    setmark('KID_sym_center')
     
     movedirection(-1,distance_kids/2)
     setmark('KID'+str(n+1)+'in')
     connectors.append(base.connector(1,'KID'+str(n+1)+'in'))
     
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
     setmark('KID'+str(n+1))
     connectors.append(base.connector(1,'KID'+str(n+1)))
     
@@ -176,7 +197,7 @@ def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
     
     
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
 
     movedirection(1, 0.5*W_cap_top + sep_coupling_bar + 0.5*width_coupling_bar)
     setmark('start_coupling_bar')
@@ -203,7 +224,7 @@ def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     wirego(-1, sep_coupling_bar + 0.5*(width_coupling_bar - width_coupling_bar_2), width_coupling_bar_2)
     
     ## Capacitor
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
     movedirection(direction, kid_spacing)
     wire(direction, L_cap_top, W_cap_top)
     
@@ -298,13 +319,13 @@ def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     offset_diel = (length_coupling_bridge - length_bridge_diel)/2
     width_bridge_diel = 2*12.0 + width_coupling_bridge
     
-    setmark('KiD_sym_centre')
+    setmark('KID_sym_center')
     
     movedirection(-1,distance_kids/2)
     setmark('KID'+str(n+1)+'in')
     connectors.append(base.connector(1,'KID'+str(n+1)+'in'))
     
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
     setmark('KID'+str(n+1))
     connectors.append(base.connector(1,'KID'+str(n+1)))
     
@@ -314,7 +335,7 @@ def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
     
     
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
 
     movedirection(1, 0.5*W_cap_top + sep_coupling_bar + 0.5*width_coupling_bar)
     setmark('start_coupling_bar')
@@ -341,7 +362,7 @@ def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     wirego(-1, sep_coupling_bar + 0.5*(width_coupling_bar - width_coupling_bar_2), width_coupling_bar_2)
     
     ## Capacitor
-    gomark('KiD_sym_centre')
+    gomark('KID_sym_center')
     movedirection(direction, kid_spacing)    
     wire(direction, L_cap_top, W_cap_top)
     
