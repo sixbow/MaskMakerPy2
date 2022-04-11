@@ -37,6 +37,9 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     L_OrigintoMSL = (ro_line.line/2) - L_coupler_overlap
     SiC_padding = 6
     L_connectfromSiC = 4
+    W_NbTiN_Top_via = 4
+    L_wideslot_padding = 2
+    W_wideslot_width = 3*W_NbTiN_Top_via
     #L_Al = 1000
     #SiC_margin = 40 
     #SiC_bottom_L = 15
@@ -46,16 +49,18 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # SiN_L = 30
     # SiN_W = 20
         # Process Bias for optical nanofabrication [um] +is outward(bigger then design value) and -is inward (smaller than design value) mask
-    pbNbTiN_GNDx = 0
-    pbNbTiN_GNDy = 0
+    pbNbTiN_GNDx = 5
+    pbNbTiN_GNDy = 5
     pbNbTiN_Topx = 0
     pbNbTiN_Topy = 0
-    pbSiCx = 0 
-    pbSiCy = 0
+    print("NbTiN_GND process bias[um](x-direction) = {0}".format(pbNbTiN_GNDx) )
+    print("NbTiN_GND process bias[um](y-direction) = {0}".format(pbNbTiN_GNDx) )
+    print("NbTiN_Top process bias[um](x-direction) = {0}".format(pbNbTiN_Topx) )
+    print("NbTiN_Top process bias[um](y-direction) = {0}".format(pbNbTiN_Topx) )
 
 
-
-
+    # We don't use any process bias for the TL and the SiC layer because dimentions are not critical. The process bias for the TL can be accounted for by changing
+    # the L_coupler_overlap (Overlap of the TL)
 
     # Draw Microstrip line that connects the Throughline(TL) with the Parrallel plate capacitor(PPC).
     # Begin position relative to KID_sym_center (This is the middle of the TL line.).
@@ -81,14 +86,24 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     wire(-1j, L_cap_top + (2*pbNbTiN_Topy), W_cap_top + (2*pbNbTiN_Topx))
     # End writing: PPC 
     # Begin writing: NbTiN via/slope connector
-    gomark('KID_begin_PPC_print')
-    movedirection(-1j, L_cap_top + (2*pbNbTiN_Topy) )
+    gomark('KID_begin_PPC_target')
+    movedirection(-1j, L_cap_top  )
+    setmark('KID_end_PPC_target')
+    movedirection(-1j, pbNbTiN_Topy )
     setmark('KID_end_PPC_print')
-    wire(-1j,SiC_padding + L_connectfromSiC , 4+pbNbTiN_Topx)
+    wire(-1j,SiC_padding + L_connectfromSiC , W_NbTiN_Top_via+pbNbTiN_Topx)
     # End writing: NbTiN via/slope connector
 
+    # Begin writing: Wide slot NbTiN_GND slot
+    layername('NbTiN_GND')
+    gomark('KID_end_PPC_target')
+    setmark('KID_begin_wideslot_target')
+    movedirection(-1j,-pbNbTiN_GNDy)
+    setmark('KID_begin_wideslot_print')
+    wire(-1j, SiC_padding + L_connectfromSiC + L_wideslot_padding + (2*pbNbTiN_GNDy) , W_wideslot_width + (2*pbNbTiN_GNDx))
+    # End writing: Wide slot NbTiN_GND slot
 
-
+    
 
 
 
