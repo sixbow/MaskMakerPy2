@@ -33,17 +33,21 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     
     # Write KID
         # Parameters
-    L_TLtoPPC = 20
-    L_OrigintoMSL = (ro_line.line/2) - L_coupler_overlap
-    SiC_padding = 6
-    L_connectfromSiC = 4
-    W_NbTiN_Top_via = 4
-    L_wideslot_padding = 2
-    W_wideslot_width = 3*W_NbTiN_Top_via
-    S_CPW  = W_CPW
-
-    L_Al = 1000
-    L_CPWslot = 1000 - L_connectfromSiC
+    L_TLtoPPC = 20 #<- User variable!
+    L_OrigintoMSL = (ro_line.line/2) - L_coupler_overlap # Calculated from given readout line.
+    SiC_padding = 6 #<- User variable!
+    L_connectfromSiC = 6 #<- User variable!
+    W_NbTiN_Top_via = 4 #<- User variable!
+    L_wideslot_padding = 2 #<- User variable!
+    SiC_padding_top = ro_line.gap # User variable
+    W_wideslot_width = 3*W_NbTiN_Top_via # Calculated
+    S_CPW  = W_CPW # Calculated
+    L_shortoverlap = 3 #<- User variable! Overlap of the short on the end of the readout line.
+    L_CPWtarget = 1000 #<- User variable(Change this if you want)!  This is the user adaptable target length of the cpw section. 
+    L_CPWslot = L_CPWtarget - L_connectfromSiC # Calculated
+    L_viaoverlap = L_connectfromSiC/2
+    L_Al = L_viaoverlap  + L_wideslot_padding + L_CPWslot + L_shortoverlap # Calculated
+    #L_SiC = SiC_padding + L_cap_top + L_TLtoPPC + (2*ro_line.gap)
     #SiC_margin = 40 
     #SiC_bottom_L = 15
     #NbTiN_SiN_L_overlap = 20
@@ -87,7 +91,8 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     movedirection(-1j, -pbNbTiN_Topy)
     setmark('KID_begin_PPC_print')
     wire(-1j, L_cap_top + (2*pbNbTiN_Topy), W_cap_top + (2*pbNbTiN_Topx))
-    # End writing: PPC 
+    # End writing: PPC
+    #  
     # Begin writing: NbTiN via/slope connector
     layername('NbTiN_Top')
     gomark('KID_begin_PPC_target')
@@ -95,7 +100,11 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     setmark('KID_end_PPC_target')
     movedirection(-1j, pbNbTiN_Topy )
     setmark('KID_end_PPC_print')
-    wire(-1j,SiC_padding + L_connectfromSiC , W_NbTiN_Top_via+pbNbTiN_Topx)
+    wirego(-1j,SiC_padding + L_connectfromSiC , W_NbTiN_Top_via+pbNbTiN_Topx)
+    setmark('KID_end_NbTiNvia_print')
+    movedirection(-1j, -pbNbTiN_Topy)
+    setmark('KID_end_NbTiNvia_target')
+    
     # End writing: NbTiN via/slope connector
 
     # Begin writing: Wide slot NbTiN_GND slot
@@ -115,11 +124,19 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     layername('NbTiN_GND')
     gomark('KID_end_wideslot_target')
     setmark('KID_begin_CPWslot_target')
-    movedirection(-1j,pbNbTiN_GNDy)
+    movedirection(-1j,(2*pbNbTiN_GNDy))
     setmark('KID_begin_CPWslot_print')
     wire(-1j, L_CPWslot + pbNbTiN_GNDy, (2*S_CPW+W_CPW)+(2*pbNbTiN_GNDx))
+    movedirection(-1j, L_CPWslot - (2*pbNbTiN_GNDy))
+    setmark('KID_end_CPWslot_target')
     # End writing: Hybrid CPW slot 
 
+    # Begin writing: Al line 
+    layername('Aluminum')
+    gomark('KID_end_NbTiNvia_target')
+    movedirection(-1j, -L_viaoverlap)
+    wire(-1j, L_Al, W_CPW)
+    # End writing: Al line
     
 
 
