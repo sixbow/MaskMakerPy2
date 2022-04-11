@@ -47,7 +47,8 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     L_CPWslot = L_CPWtarget - L_connectfromSiC # Calculated
     L_viaoverlap = L_connectfromSiC/2
     L_Al = L_viaoverlap  + L_wideslot_padding + L_CPWslot + L_shortoverlap # Calculated
-    #L_SiC = SiC_padding + L_cap_top + L_TLtoPPC + (2*ro_line.gap)
+    L_SiC = SiC_padding + L_cap_top + L_TLtoPPC + (2*ro_line.gap) + ro_line.line + SiC_padding_top
+    W_SiC = 3*W_cap_top  + 2*SiC_padding
     #SiC_margin = 40 
     #SiC_bottom_L = 15
     #NbTiN_SiN_L_overlap = 20
@@ -138,6 +139,12 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     wire(-1j, L_Al, W_CPW)
     # End writing: Al line
     
+    # Begin writing: SiC Dielectric patch. (Warning writing in the other direction 1j direction (+y))
+    layername('SiC')
+    gomark('KID_end_PPC_target')
+    movedirection(-1j, SiC_padding) # Now we are where the SiC dielectric patch should start.
+    wire(1j, L_SiC, W_SiC) # Warning this is in the +y direction (+j direction)
+    # End writing: SiC Dielectric patch.
 
 
 
