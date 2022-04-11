@@ -9,7 +9,7 @@ import numpy as np
 from collections import OrderedDict # This is a dictionary where the key-value pairs are ordered
 
 #%%
-filename = 'CKID_chipV1.cif'
+filename = 'CKID_chipV0_5Branch2.cif'
 # file with design parameters
 design = np.loadtxt('partof_design_parameters.txt', skiprows = 1)
 
@@ -36,7 +36,7 @@ gg.scale = unit_scale
 
 # Define and create chip
 gg.newSymbol('Main', top = True) # Bruno: Not sure what 'top' is, I think it is probably a symbol hierarchy (so you can have symbols inside symbols)
-on_chip_name = "CKID V0.2" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
+on_chip_name = "CKID V0.5B2" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
 [lx,ly] = parts.Chipbasis.testchip20x4(layers, on_chip_name) # Bruno: writes chip outline, this is the size that we want for the microwave chip, lx = 20000, ly = 20000
 
 ## KID spacing
@@ -85,7 +85,7 @@ W_CPW = np.array([0.5, 0.5, 0.5, 1, 1, 1, 2, 2, 2, 4, 4, 4]) # Width of the cent
 
 for n in range(0,N_KIDs):
     moveto(kid_x[n], ly/2.) # Bruno: moves current coordinates (and the KID is drawn there)
-    connectors = parts.PPCKIDs.Sietse_CKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n])
+    connectors = parts.PPCKIDs.Sietse_CKID_B2(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n])
 
 #%%
 ## DRAW Bondpads and readout
