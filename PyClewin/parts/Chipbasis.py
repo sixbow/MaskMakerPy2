@@ -434,7 +434,7 @@ def testchip20x4(layers, chipname = ''):
     layername('Aluminum')
 
     if chipname != '':
-        go(1e3, 1e3)
+        go(1e3, 3e3)#Was:go(1e3, 1e3) Edit_Sietse
         base.text(1, chipname, 500)
 
     

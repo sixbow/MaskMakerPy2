@@ -13,7 +13,7 @@ import scipy.constants as spc
 import CPWs
 
 def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_top, W_coupler, L_coupler_overlap, W_CPW):
-    #Edit_Siets: I think this should not be here!! #from PyClewin import *
+    #Edit_Sietse: I think this should not be here!! #from PyClewin import *
         
     # Make connectors, I think we need 3 connectors per KID to make sure that the bridges won't overlap with the coupler
     setmark('KID_sym_center')
@@ -40,7 +40,10 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     W_NbTiN_Top_via = 4
     L_wideslot_padding = 2
     W_wideslot_width = 3*W_NbTiN_Top_via
-    #L_Al = 1000
+    S_CPW  = W_CPW
+
+    L_Al = 1000
+    L_CPWslot = 1000 - L_connectfromSiC
     #SiC_margin = 40 
     #SiC_bottom_L = 15
     #NbTiN_SiN_L_overlap = 20
@@ -49,8 +52,8 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # SiN_L = 30
     # SiN_W = 20
         # Process Bias for optical nanofabrication [um] +is outward(bigger then design value) and -is inward (smaller than design value) mask
-    pbNbTiN_GNDx = 5
-    pbNbTiN_GNDy = 5
+    pbNbTiN_GNDx = 0
+    pbNbTiN_GNDy = 0
     pbNbTiN_Topx = 0
     pbNbTiN_Topy = 0
     print("NbTiN_GND process bias[um](x-direction) = {0}".format(pbNbTiN_GNDx) )
@@ -86,6 +89,7 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     wire(-1j, L_cap_top + (2*pbNbTiN_Topy), W_cap_top + (2*pbNbTiN_Topx))
     # End writing: PPC 
     # Begin writing: NbTiN via/slope connector
+    layername('NbTiN_Top')
     gomark('KID_begin_PPC_target')
     movedirection(-1j, L_cap_top  )
     setmark('KID_end_PPC_target')
@@ -101,9 +105,25 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     movedirection(-1j,-pbNbTiN_GNDy)
     setmark('KID_begin_wideslot_print')
     wire(-1j, SiC_padding + L_connectfromSiC + L_wideslot_padding + (2*pbNbTiN_GNDy) , W_wideslot_width + (2*pbNbTiN_GNDx))
+    movedirection(-1j, SiC_padding + L_connectfromSiC + L_wideslot_padding )
+    setmark('KID_end_wideslot_target')
+    movedirection(-1j, pbNbTiN_GNDy )
+    setmark('KID_end_wideslot_print')
     # End writing: Wide slot NbTiN_GND slot
 
+    # Begin writing: Hybrid CPW slot (CPWslot: 2S+W)
+    layername('NbTiN_GND')
+    gomark('KID_end_wideslot_target')
+    setmark('KID_begin_CPWslot_target')
+    movedirection(-1j,pbNbTiN_GNDy)
+    setmark('KID_begin_CPWslot_print')
+    wire(-1j, L_CPWslot + pbNbTiN_GNDy, (2*S_CPW+W_CPW)+(2*pbNbTiN_GNDx))
+    # End writing: Hybrid CPW slot 
+
     
+
+
+
 
 
 
