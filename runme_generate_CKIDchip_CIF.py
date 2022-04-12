@@ -85,7 +85,7 @@ W_CPW = np.array([0.5, 0.5, 0.5, 1, 1, 1, 2, 2, 2, 4, 4, 4]) # Width of the cent
 
 for n in range(0,N_KIDs):
     moveto(kid_x[n], ly/2.) # Bruno: moves current coordinates (and the KID is drawn there)
-    connectors = parts.PPCKIDs.Sietse_CKID_B2(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n])
+    connectors = parts.PPCKIDs.Sietse_CKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n])
 
 #%%
 ## DRAW Bondpads and readout
