@@ -61,11 +61,11 @@ CPW_TL_W = 20
 CPW_TL_S = 8
 
 ro_line_dense = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
-                                parts.Bridges.Bridge('Polyimide', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
+                                parts.Bridges.Bridge('SiC', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
                                 bridgeDistance = 1e3)
 
 ro_line_sparse = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
-                                parts.Bridges.Bridge('Polyimide', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
+                                parts.Bridges.Bridge('SiC', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
                                 bridgeDistance = 1e3)
 
 # Display the TL properties.

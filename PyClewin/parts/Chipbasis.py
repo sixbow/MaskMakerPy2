@@ -422,12 +422,13 @@ def testchip20x4(layers, chipname = ''):
     
     layername('NbTiN_GND')
     gomark('chip00')
-    wire(1, 20000. , 125., shift = (0, -125./2) )
-    wire(1j, 4000.+2*125. , 125, shift = (-125., 125./2) )
+    dice_street_width = 250
+    wire(1, 20000. , dice_street_width, shift = (0, -dice_street_width/2) )
+    wire(1j, 4000.+2*dice_street_width , dice_street_width, shift = (-dice_street_width, dice_street_width/2) )
     
     gomark('chipFF')
-    wire(-1, 20000. , 125., shift = (0, -125./2) )
-    wire(-1j, 4000.+2*125. , 125, shift = (-125., 125./2) )
+    wire(-1, 20000. , dice_street_width, shift = (0, -dice_street_width/2) )
+    wire(-1j, 4000.+2*dice_street_width , dice_street_width, shift = (-dice_street_width, dice_street_width/2) )
     
 
     gomark('chip00')
@@ -463,7 +464,7 @@ def testchip20x4(layers, chipname = ''):
     writecorner(-1j)
 
     # define starting positions of readout CPW
-    dx_bondpad = 1e3
+    dx_bondpad = 1e3 #Edit_Sietse: was 1e3 But i want to have little bit more margin in order to have sapphire cutting not break bondpads
     gomark('chip00')
     go(dx_bondpad, ly_chip/2.)
     setmark('bondpadleft')
