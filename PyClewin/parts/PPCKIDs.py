@@ -12,7 +12,7 @@ import numpy as np
 import scipy.constants as spc
 import CPWs
 
-def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_top, W_coupler, L_coupler_overlap, W_CPW):
+def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_top, W_coupler, L_coupler_overlap, W_CPW , S_CPW ):
     #Edit_Sietse: I think this should not be here!! #from PyClewin import *
         
     # Make connectors, I think we need 3 connectors per KID to make sure that the bridges won't overlap with the coupler
@@ -41,7 +41,7 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     L_wideslot_padding = 2 #<- User variable!
     SiC_padding_top = ro_line.gap # User variable
     W_wideslot_width = 3*W_NbTiN_Top_via # Calculated
-    S_CPW  = W_CPW # Calculated
+    #S_CPW  = W_CPW # Calculated
     L_shortoverlap = 3 #<- User variable! Overlap of the short on the end of the readout line.
     L_CPWtarget = 1000 #<- User variable(Change this if you want)!  This is the user adaptable target length of the cpw section. 
     L_CPWslot = L_CPWtarget - L_connectfromSiC # Calculated
@@ -338,7 +338,7 @@ def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
 
     return connectors
     
-def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_gap, ro_line, distance_kids, layers, connectors, n):
+def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_gap, ro_line, distance_kids, layers, connectors, n ):
     #Edit_Siets: I think this should not be here!! #from PyClewin import *
 
     
