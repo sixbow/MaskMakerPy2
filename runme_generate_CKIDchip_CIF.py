@@ -9,7 +9,7 @@ import numpy as np
 from collections import OrderedDict # This is a dictionary where the key-value pairs are ordered
 
 #%%
-filename = 'CKID_chipV0_9Branch2.cif'
+filename = 'CKID_chipV0_9Branch2_NoBridge.cif'
 # file with design parameters
 design = np.loadtxt('partof_design_parameters.txt', skiprows = 1)
 
@@ -36,7 +36,7 @@ gg.scale = unit_scale
 
 # Define and create chip
 gg.newSymbol('Main', top = True) # Bruno: Not sure what 'top' is, I think it is probably a symbol hierarchy (so you can have symbols inside symbols)
-on_chip_name = "CKID V0.9B2" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
+on_chip_name = "CKID V0.9B2 NoBridge" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
 [lx,ly] = parts.Chipbasis.testchip20x4(layers, on_chip_name) # Bruno: writes chip outline, this is the size that we want for the microwave chip, lx = 20000, ly = 20000
 
 ## KID spacing
@@ -61,11 +61,11 @@ CPW_TL_W = 20
 CPW_TL_S = 6
 
 ro_line_dense = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
-                                parts.Bridges.Bridge('SiC', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
+                                parts.Bridges.Bridge('SiC', 'Aluminum', 0, 0, 0, 0),
                                 bridgeDistance = 1e3)
 
 ro_line_sparse = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
-                                parts.Bridges.Bridge('SiC', 'Aluminum', 30.0, 40.0, 65.0, 20.0),
+                                parts.Bridges.Bridge('SiC', 'Aluminum', 0 , 0, 0, 0),
                                 bridgeDistance = 1e3)
 
 # Display the TL properties.
