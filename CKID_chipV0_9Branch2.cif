@@ -5,9 +5,9 @@
 (3584 CA  Utrecht);
 (Nederland);
 (Layer names:);
-L L0; (CleWin: 0 NbTiN_GND/0ff00ff00 0ff00ff00));
+L L0; (CleWin: 0 NbTiN_GND/0f00ff00 0f00ff00));
 L L1; (CleWin: 1 SiC/050000aa 050000aa));
-L L2; (CleWin: 2 NbTiN_Top/0ff0000ff 0ff0000ff));
+L L2; (CleWin: 2 NbTiN_Top/0f0000ff 0f0000ff));
 L L3; (CleWin: 3 Polyimide/0ff0f000 0ff0f000));
 L L4; (CleWin: 4 Aluminum/0fff0000 0fff0000));
 L L5; (CleWin: 5 text/05000000 05000000));

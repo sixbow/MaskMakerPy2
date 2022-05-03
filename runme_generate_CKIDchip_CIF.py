@@ -18,9 +18,9 @@ gg.doSymbolWriting = True
 
 layers = OrderedDict()
 #layers = collections.OrderedDict()
-layers['NbTiN_GND'] =  '0ff00ff00'
+layers['NbTiN_GND'] =  '0f00ff00'
 layers['SiC'] = '050000aa'
-layers['NbTiN_Top'] = '0ff0000ff'
+layers['NbTiN_Top'] = '0f0000ff'
 layers['Polyimide'] = '0ff0f000'
 layers['Aluminum'] = '0fff0000'
 layers['text'] = '05000000'
