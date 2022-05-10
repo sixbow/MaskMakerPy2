@@ -95,7 +95,7 @@ def Klayout_lyp_gen(layers, file_name='Klayout_layer_properties.lyp'):
 
 
 #%%
-filename = 'CKID_chipV0_9Branch2.cif'
+filename = 'CKID_chipV1.cif'
 # file with design parameters
 design = np.loadtxt('partof_design_parameters.txt', skiprows = 1)
 
@@ -130,7 +130,7 @@ gg.scale = unit_scale
 
 # Define and create chip
 gg.newSymbol('Main', top = True) # Bruno: Not sure what 'top' is, I think it is probably a symbol hierarchy (so you can have symbols inside symbols)
-on_chip_name = "CKID V0.9B2" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
+on_chip_name = "CKID V1.0" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
 [lx,ly] = parts.Chipbasis.testchip20x4(layers, on_chip_name) # Bruno: writes chip outline, this is the size that we want for the microwave chip, lx = 20000, ly = 20000
 
 ## KID spacing
@@ -175,8 +175,8 @@ L_caps_top = np.array([50.961 ,49.794 ,48.675 ,56.837 ,55.667 ,54.541 ,59.546 ,5
 W_caps_top = L_caps_top
 W_coupler = 4
 L_coupler_overlap = np.array([5.50, 5.50, 5.50, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]) # Oeff coupling sizes
-W_CPW = np.array([6, 6, 6, 6, 6, 6, 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
-S_CPW = np.array([-2.25, -2.25, -2.25 ,-1.5 ,-1.5 ,-1.5 , 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
+W_CPW = np.array([6, 6, 6, 6, 6, 6, 2, 2, 2, 4, 4, 4]) # Width of the center line 
+S_CPW = np.array([-2, -2, -2 ,-1.5 ,-1.5 ,-1.5 , 2, 2, 2, 4, 4, 4]) # Width of the center line :: S = (Tot_width - W_CPW)/2
 for n in range(0,N_KIDs):
     moveto(kid_x[n], ly/2.) # Bruno: moves current coordinates (and the KID is drawn there)
     connectors = parts.PPCKIDs.Sietse_CKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n] , S_CPW[n])
