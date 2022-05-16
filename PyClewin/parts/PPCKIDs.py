@@ -43,7 +43,7 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     W_wideslot_width = 3*W_NbTiN_Top_via # Calculated
     #S_CPW  = W_CPW # Calculated
     L_shortoverlap = 3 #<- User variable! Overlap of the short on the end of the readout line.
-    L_CPWtarget = 1000 #<- User variable(Change this if you want)!  This is the user adaptable target length of the cpw section. 
+    L_CPWtarget = 992 #<- User variable(Change this if you want)!  This is the user adaptable target length of the cpw section. 
     L_CPWslot = L_CPWtarget - L_connectfromSiC # Calculated
     L_viaoverlap = L_connectfromSiC/2
     L_Al = L_viaoverlap  + L_wideslot_padding + L_CPWslot + L_shortoverlap # Calculated
