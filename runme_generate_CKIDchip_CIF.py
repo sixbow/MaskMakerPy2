@@ -94,7 +94,7 @@ def Klayout_lyp_gen(layers, file_name='Klayout_layer_properties.lyp'):
 #/Insert
 
 #%%
-filename = 'CKID_chipV1_0_NoBridge.cif'
+filename = 'CKID_chipV1_2_NoBridge.cif'
 # file with design parameters
 design = np.loadtxt('partof_design_parameters.txt', skiprows = 1)
 
@@ -127,7 +127,7 @@ gg.scale = unit_scale
 
 # Define and create chip
 gg.newSymbol('Main', top = True) # Bruno: Not sure what 'top' is, I think it is probably a symbol hierarchy (so you can have symbols inside symbols)
-on_chip_name = "CKID V1.0 NoBridge" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
+on_chip_name = "CKID V1.2 NoBridge" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
 [lx,ly] = parts.Chipbasis.testchip20x4(layers, on_chip_name) # Bruno: writes chip outline, this is the size that we want for the microwave chip, lx = 20000, ly = 20000
 
 ## KID spacing

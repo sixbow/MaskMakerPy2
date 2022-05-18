@@ -38,14 +38,15 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     SiC_padding = 6 #<- User variable!
     L_connectfromSiC = 6 #<- User variable!
     W_NbTiN_Top_via = 4 #<- User variable!
-    L_wideslot_padding = 2 #<- User variable!
+    L_wideslot_padding = 5 #<- User variable!
     SiC_padding_top = ro_line.gap # User variable
     W_wideslot_width = 3*W_NbTiN_Top_via # Calculated
+    PPCtoNbTiN_length = 2 # Used to move slot.
     #S_CPW  = W_CPW # Calculated
-    L_shortoverlap = 3 #<- User variable! Overlap of the short on the end of the readout line.
-    L_CPWtarget = 1000 #<- User variable(Change this if you want)!  This is the user adaptable target length of the cpw section. 
+    L_shortoverlap = 7 #<- User variable! Overlap of the short on the end of the readout line.
+    L_CPWtarget = 989 #<- User variable(Change this if you want)!  This is the user adaptable target length of the cpw section. 
     L_CPWslot = L_CPWtarget - L_connectfromSiC # Calculated
-    L_viaoverlap = L_connectfromSiC/2
+    L_viaoverlap = 5 #L_connectfromSiC/2
     L_Al = L_viaoverlap  + L_wideslot_padding + L_CPWslot + L_shortoverlap # Calculated
     L_SiC = SiC_padding + L_cap_top + L_TLtoPPC + (2*ro_line.gap) + ro_line.line + SiC_padding_top
     W_SiC = 3*W_cap_top  + 2*SiC_padding
@@ -111,6 +112,7 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     # Begin writing: Wide slot NbTiN_GND slot
     layername('NbTiN_GND')
     gomark('KID_end_PPC_target')
+    movedirection(-1j, PPCtoNbTiN_length ) #Moving slot
     setmark('KID_begin_wideslot_target')
     movedirection(-1j,-pbNbTiN_GNDy)
     setmark('KID_begin_wideslot_print')
