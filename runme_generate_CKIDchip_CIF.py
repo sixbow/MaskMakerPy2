@@ -173,12 +173,14 @@ print("S(gap) TL is : {0}".format(str(ro_line_sparse.gap)))
 connectors = [] # define an empty connector list
 # Bruno: loop over all KIDs
 ro_d = 20 # distance of top NbTiN plate to roline
-L_caps_top = np.array([50.961 ,49.794 ,48.675 ,56.837 ,55.667 ,54.541 ,59.546 ,58.449 ,57.390 ,61.127 ,60.091 ,59.088]) # Plate length (or width), just 12 numbers that I randomly chose...
+# Old values: L_caps_top = np.array([50.961 ,49.794 ,48.675 ,56.837 ,55.667 ,54.541 ,59.546 ,58.449 ,57.390 ,61.127 ,60.091 ,59.088]) # Plate length (or width)
+L_caps_top = np.array([58.943 ,57.597 ,56.308 ,56.953 ,55.781 ,54.655 ,59.695 ,58.596 ,57.536 ,61.264 ,60.227 ,59.223])
 W_caps_top = L_caps_top
 W_coupler = 4
 L_coupler_overlap = np.array([5.50, 5.50, 5.50, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]) # Oeff coupling sizes
 W_CPW = np.array([6, 6, 6, 6, 6, 6, 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
-S_CPW = np.array([-2, -2, -2 ,-1.5 ,-1.5 ,-1.5 , 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
+# Old values: S_CPW = np.array([-2, -2, -2 ,-1.5 ,-1.5 ,-1.5 , 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
+S_CPW = np.array([-2.125, -2.125, -2.125 ,-1.5 ,-1.5 ,-1.5 , 2, 2, 2, 4, 4, 4]) # Width of the center line coupling sizes
 for n in range(0,N_KIDs):
     moveto(kid_x[n], ly/2.) # Bruno: moves current coordinates (and the KID is drawn there)
     connectors = parts.PPCKIDs.Sietse_CKID(connectors, kid_spacing, n, ro_line_sparse, ro_d, L_caps_top[n], W_caps_top[n], W_coupler, L_coupler_overlap[n], W_CPW[n] , S_CPW[n])
