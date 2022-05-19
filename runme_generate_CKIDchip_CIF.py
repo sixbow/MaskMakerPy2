@@ -1,4 +1,5 @@
 #%%
+from ensurepip import version
 from PyClewin import gg, parts, moveto, gomark, x2m, base, writeTotalString
 ## gg (script) is a short name for the 'script' class that contains the layers, connectors, the methods etc. 
 ## parts (parts) are pre-defined parts
@@ -94,7 +95,11 @@ def Klayout_lyp_gen(layers, file_name='Klayout_layer_properties.lyp'):
 #/Insert
 
 #%%
-filename = 'CKID_chipV1_2_NoBridge.cif'
+#Version number of the chip.
+version = str(1)
+version_sub = str(3)
+
+filename = 'CKID_chipV'+version+'_'+version_sub+'_NoBridge.cif'
 # file with design parameters
 design = np.loadtxt('partof_design_parameters.txt', skiprows = 1)
 
@@ -127,7 +132,7 @@ gg.scale = unit_scale
 
 # Define and create chip
 gg.newSymbol('Main', top = True) # Bruno: Not sure what 'top' is, I think it is probably a symbol hierarchy (so you can have symbols inside symbols)
-on_chip_name = "CKID V1.2 NoBridge" # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
+on_chip_name = "CKID V"+version+'.'+version_sub+' NoBridge' # Bruno: This text is written on the chip (in the Al layer), no apostrophes allowed
 [lx,ly] = parts.Chipbasis.testchip20x4(layers, on_chip_name) # Bruno: writes chip outline, this is the size that we want for the microwave chip, lx = 20000, ly = 20000
 
 ## KID spacing
@@ -153,11 +158,11 @@ CPW_TL_S = 6
 
 ro_line_dense = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
                                 parts.Bridges.Bridge('SiC', 'Aluminum', 0, 0, 0, 0),
-                                bridgeDistance = 1e3)
+                                bridgeDistance = 20e3)
 
 ro_line_sparse = parts.CPWs.CPWreadout(CPW_TL_W, CPW_TL_S, mesh, 200, 'NbTiN_GND', 'text',
                                 parts.Bridges.Bridge('SiC', 'Aluminum', 0 , 0, 0, 0),
-                                bridgeDistance = 1e3)
+                                bridgeDistance = 20e3)
 
 # Display the TL properties.
 print("W(line) TL is : {0}".format(str(ro_line_sparse.line)))

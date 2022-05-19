@@ -29,7 +29,7 @@ def Sietse_CKID(connectors, distance_kids, n, ro_line, ro_d, L_cap_top, W_cap_to
     movedirection(1,distance_kids/2)
     setmark('KID'+str(n+1)+'out')
     connectors.append(base.connector(1,'KID'+str(n+1)+'out'))
-    ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
+    #ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
     
     # Write KID
         # Parameters
@@ -247,7 +247,7 @@ def PPCkid_v7(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     movedirection(1,distance_kids/2)
     setmark('KID'+str(n+1)+'out')
     connectors.append(base.connector(1,'KID'+str(n+1)+'out'))
-    ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
+    #ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
     
     
     gomark('KID_sym_center')
@@ -385,7 +385,7 @@ def PPCkid_v8(direction, L_cap, W_cap, overlap, N_inductor, L_inductor, L_NBTIN_
     movedirection(1,distance_kids/2)
     setmark('KID'+str(n+1)+'out')
     connectors.append(base.connector(1,'KID'+str(n+1)+'out'))
-    ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
+    #ro_line.bridgeClass.draw(1, ro_line.line, ro_line.gap)
     
     
     gomark('KID_sym_center')
