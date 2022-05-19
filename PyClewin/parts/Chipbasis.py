@@ -422,7 +422,7 @@ def testchip20x4(layers, chipname = ''):
     
     layername('NbTiN_GND')
     gomark('chip00')
-    dice_street_width = 250
+    dice_street_width = 100
     wire(1, 20000. , dice_street_width, shift = (0, -dice_street_width/2) )
     wire(1j, 4000.+2*dice_street_width , dice_street_width, shift = (-dice_street_width, dice_street_width/2) )
     
